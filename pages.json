@@ -20,17 +20,15 @@
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "pages/ad/ad",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
 		}
-	    ,{
-            "path" : "pages/ad/ad",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
@@ -58,5 +56,8 @@
 			"selectedIconPath": "static/logo.png",
 			"text": "我"
 		}]
+	},
+	"easycom": {
+		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
 	}
 }
