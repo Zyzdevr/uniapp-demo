@@ -20,7 +20,7 @@
 		</view>
 		<view class="main">
 			<view class="btn-groups-index">
-				<button>发现</button>
+				<u-button>发现</u-button>
 				<button>热点</button>
 			</view>
 		</view>
@@ -36,8 +36,12 @@
 				title: 'Hello'
 			}
 		},
-		onLoad() {
-
+		async onLoad() {
+			// this.$u.get('api/index').then(res=>{
+			// })
+			const res = await this.$u.api.getIndexData()
+			console.log(res)
+			console.log(this.vuex_user.name)
 		},
 		methods: {
 
