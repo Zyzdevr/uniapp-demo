@@ -20,41 +20,19 @@
 		</view>
 		<view class="main">
 			<u-tabs :list="list" :is-scroll="false" :current="current" @change="change"></u-tabs>
-			<view class="list-goods">
-				<navigator url="#" class="good">
-					<u-image width="100%" height="300rpx" :src="src"></u-image>
-					<view class="name-good">书名：测试数据，作者Zyz，随便写点</view>
+			<view class="list-goods u-skeleton">
+				<navigator url="#" class="good" v-for="item in (goods.length !== 0 ? goods : 6)" :key="item.id">
+					<u-image class="u-skeleton-fillet" width="100%" height="300rpx" :src="item.cover_url"></u-image>
+					<view class="name-good">{{item.title}}</view>
 					<view class="info-good">
-						<text class="price-good">￥25.9</text>
-						<text class="sales-good">销量：1</text>
-					</view>
-				</navigator>
-				<navigator url="#" class="good">
-					<u-image width="100%" height="300rpx" :src="src"></u-image>
-					<view class="name-good">书名：测试数据，作者Zyz，随便写点</view>
-					<view class="info-good">
-						<text class="price-good">￥25.9</text>
-						<text class="sales-good">销量：1</text>
-					</view>
-				</navigator>
-				<navigator url="#" class="good">
-					<u-image width="100%" height="300rpx" :src="src"></u-image>
-					<view class="name-good">书名：测试数据，作者Zyz，随便写点</view>
-					<view class="info-good">
-						<text class="price-good">￥25.9</text>
-						<text class="sales-good">销量：1</text>
-					</view>
-				</navigator>
-				<navigator url="#" class="good">
-					<u-image width="100%" height="300rpx" :src="src"></u-image>
-					<view class="name-good">书名：测试数据，作者Zyz，随便写点</view>
-					<view class="info-good">
-						<text class="price-good">￥25.9</text>
-						<text class="sales-good">销量：1</text>
+						<text class="price-good u-skeleton-fillet">￥{{item.price}}</text>
+						<text class="sales-good u-skeleton-fillet">销量：{{item.sales}}</text>
 					</view>
 				</navigator>
 			</view>
 		</view>
+		<!--骨架屏-->
+		<u-skeleton :loading="loading" :animation="true" bgColor="#fff"></u-skeleton>
 
 
 	</view>
@@ -72,15 +50,19 @@
 				}, {
 					name: '最近上新',
 				}],
-				current: 0
+				current: 0,
+				goods: [],
+				loading: false,
 			}
 		},
 		async onLoad() {
 			// this.$u.get('api/index').then(res=>{
 			// })
+			this.loading = true
 			const res = await this.$u.api.getIndexData()
-			console.log(res)
-			console.log(this.vuex_user.name)
+			this.loading = false
+			this.goods = res.goods.data
+			console.log(this.goods)
 		},
 		methods: {
 			change(index) {
